@@ -1,7 +1,6 @@
 package com.touyuanren.mvpsample.ui.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,26 +11,23 @@ import com.touyuanren.mvpsample.presenter.BookPresenter;
 import com.touyuanren.mvpsample.presenter.contract.BookInfoContract;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
-public class MainActivity extends AppCompatActivity implements BookInfoContract.IView {
+public class MainActivity extends MvpActivity<BookPresenter> implements BookInfoContract.IView {
 
     @BindView(R.id.text)
     TextView text;
     @BindView(R.id.button)
     Button button;
-    private Unbinder unbinder;
-    private BookPresenter mBookPreseter;
-
     @Override
-
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        unbinder = ButterKnife.bind(this);
-        mBookPreseter = new BookPresenter(this);
         bindClick();
+    }
+
+    @Override
+    protected BookPresenter createPresenter() {
+        return new BookPresenter(this);
     }
 
     private void bindClick() {
@@ -39,20 +35,12 @@ public class MainActivity extends AppCompatActivity implements BookInfoContract.
             @Override
             public void onClick(View view) {
                 //开始请求
-                mBookPreseter.getMsg("人间失格", null, 0, 1);
+                mvpPresenter.getMsg("人间失格", null, 0, 1);
+//                LogUtil.e("mvpPresenter","mvpPresenter执行了");
             }
         });
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void dismissLoading() {
-
-    }
 
     @Override
     public void showError(String msg) {
@@ -64,11 +52,4 @@ public class MainActivity extends AppCompatActivity implements BookInfoContract.
         text.setText(msg);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (unbinder != Unbinder.EMPTY) {
-            unbinder.unbind();
-        }
-    }
 }

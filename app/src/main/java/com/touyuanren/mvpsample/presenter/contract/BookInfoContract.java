@@ -2,6 +2,7 @@ package com.touyuanren.mvpsample.presenter.contract;
 
 
 import com.touyuanren.mvpsample.bean.Book;
+import com.touyuanren.mvpsample.data.IBaseMobel;
 import com.touyuanren.mvpsample.ui.BaseView;
 
 import io.reactivex.Observable;
@@ -20,7 +21,7 @@ public interface BookInfoContract {
 //        void onRequestPermissionSError();
     }
 
-     interface IBookModel {
+     interface IBookModel  extends IBaseMobel {
 
         Observable<Book> getBookMsg(String name,String tag,int start,int count);
 

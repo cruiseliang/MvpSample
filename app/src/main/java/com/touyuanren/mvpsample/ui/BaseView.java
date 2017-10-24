@@ -5,8 +5,8 @@ package com.touyuanren.mvpsample.ui;
  */
 
 public interface BaseView {
-    void showLoading();
-
-    void dismissLoading();
+//    void showLoading();
+//
+//    void dismissLoading();
     void  showError(String msg);
 }

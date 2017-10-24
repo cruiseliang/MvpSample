@@ -1,7 +1,5 @@
 package com.touyuanren.mvpsample.data.http;
 
-import android.content.Context;
-
 import com.google.gson.GsonBuilder;
 
 import okhttp3.OkHttpClient;
@@ -15,20 +13,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitHelper {
 
-    private Context mCntext;
 
     OkHttpClient client = new OkHttpClient();
     GsonConverterFactory factory = GsonConverterFactory.create(new GsonBuilder().create());
     private static RetrofitHelper instance = null;
     private Retrofit mRetrofit = null;
-    public static RetrofitHelper getInstance(Context context){
+    public static RetrofitHelper getInstance( ){
         if (instance == null){
-            instance = new RetrofitHelper(context);
+            instance = new RetrofitHelper();
         }
         return instance;
     }
-    private RetrofitHelper(Context mContext){
-        mCntext = mContext;
+    private RetrofitHelper( ){
         init();
     }
 
